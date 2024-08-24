@@ -14,7 +14,19 @@ int printColorMap() {
 }
 
 int main() {
+    char bufferForPrintedColorMap[500]={0};
+    const char* expectedFirstRowinMap = "0 | White | Blue\n";
+    const char* expectedSecondRowinMap = "1 | White | Orange\n";
+    
+    setvbuf(stdout, bufferForPrintedColorMap, _IOFBF, 500);
+    
     int result = printColorMap();
+
+    char *firstLine_found = strstr(bufferForPrintedColorMap,expectedFirstRowinMap);
+    char *secondLine_found = strstr(bufferForPrintedColorMap,expectedSecondRowinMap);
+
+    assert(firstLine_found != NULL);
+    assert(secondLine_found != NULL);
     assert(result == 25);
     printf("All is well (maybe!)\n");
     return 0;
